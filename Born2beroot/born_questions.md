@@ -54,12 +54,11 @@ A port is a virtual point where network connections start and end. Ports are sof
 
 -   Linux task manager that allows us to execute commands at a certain time. We can automate some tasks just by telling cron what command we want to run at a specific time. For example, if we want to restart our server every day at 4:00 am, instead of having to wake up at that time, cron will do it for us.
 -   The cron command line utility, also known as cron job is a job scheduler on unix-like operating systems.
+----------------------------------------------------------------------------------------------------------------
+Let’s look at some of the formats and rules to follow when editing sudoers:
 
-- * * * * * command to be executed
-- - - - -
-| | | | |
-| | | | ----- Day of week (0 - 7) (Sunday=0 or 7)
-| | | ------- Month (1 - 12)
-| | --------- Day of month (1 - 31)
-| ----------- Hour (0 - 23)
-------------- Minute (0 - 59)
+All lines starting with # are comments
+root ALL=(ALL:ALL) ALL – this line means that the root user has unlimited privileges and can run any command on the system
+%admin ALL=(ALL) ALL – the % sign specifies a group. Anyone in the admin group has the same privileges as of root user
+%sudo   ALL=(ALL:ALL) ALL – all users in the sudo group have the privileges to run any command
+Another line of interest is #includedir /etc/sudoers.d, this means we can add configurations to the file sudoers.d and link it here.
