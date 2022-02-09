@@ -57,8 +57,11 @@ A port is a virtual point where network connections start and end. Ports are sof
 ----------------------------------------------------------------------------------------------------------------
 Let’s look at some of the formats and rules to follow when editing sudoers:
 
-All lines starting with # are comments
-root ALL=(ALL:ALL) ALL – this line means that the root user has unlimited privileges and can run any command on the system
-%admin ALL=(ALL) ALL – the % sign specifies a group. Anyone in the admin group has the same privileges as of root user
+All lines starting with # are comments:
+
+root ALL=(ALL:ALL) ALL – this line means that the root user has unlimited privileges and can run any command on the system.
+
+%admin ALL=(ALL) ALL – the % sign specifies a group. Anyone in the admin group has the same privileges as of root user.
+
 %sudo   ALL=(ALL:ALL) ALL – all users in the sudo group have the privileges to run any command
 Another line of interest is #includedir /etc/sudoers.d, this means we can add configurations to the file sudoers.d and link it here.
