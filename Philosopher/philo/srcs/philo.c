@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoumad <abderazzakoumad@gmail.com>         +#+  +:+       +#+        */
+/*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:54:16 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/04 19:21:23 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/13 12:02:30 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	helper_display(void)
+void	ft_helper_display(void)
 {
 	ft_putstr_fd("invalid number of arguments: \n", 2);
 	ft_putstr_fd("the program should take the following args: ", 2);
