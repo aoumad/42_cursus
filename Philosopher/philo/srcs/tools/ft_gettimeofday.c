@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eating_case.c                                      :+:      :+:    :+:   */
+/*   ft_gettimeofday.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 17:06:44 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/14 17:47:00 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/14 11:22:16 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/14 15:23:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void    ft_eating_case(t_philo *philo, t_activity *data)
+long long   get_time_of_day(void)
 {
-    ft_affichage("is eating", data, philo);
-    usleep(data->time_to_eat * 1000); // converted from micro to milleseconds
+    struct timeval  elapsed_time;
+
+    gettimeofday(&elapsed_time, NULL);
+    return((elapsed_time.tv_sec * 1000) + (elapsed_time.tv_usec / 1000));
+}
+
+long long   current_time(t_philo *philo)
+{
+    long long   rtn_time;
+
+    rtn_time = get_time_of_day - philo->time_reference;
+    return (rtn_time);
 }

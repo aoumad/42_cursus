@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:54:20 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/13 19:14:19 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/14 17:44:06 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <sys/time.h>
 
 # define	ERROR 0
 # define	VALID 1
@@ -33,16 +34,6 @@ enum e_philo_state
 	TAKING_FORK,
 	DEAD
 }
-typedef struct s_activity
-{
-	int				nbr_philos;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				nbr_of_meals;
-	pthread_mutex_t	*forks;
-	t_philo	*philo;
-}	t_activity;
 
 typedef	struct s_philo
 {
@@ -53,7 +44,19 @@ typedef	struct s_philo
 	int				is_eating;
 	int				taking_fork;
 	int				dead;
+	long long		time_reference;
 }	t_philo;
+
+typedef struct s_activity
+{
+	int	nbr_philos;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	nbr_of_meals;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	lock_print;
+}	t_activity;
 
 void	ft_putstr_fd(char *s, int fd);
 void	ft_print_error_msg(char *error_name, char *message);
@@ -65,4 +68,12 @@ void    ft_init_philos(t_activity  *data);
 void    ft_init_mutex(t_activity *data);
 
 void    *ft_philo_routine(void *arg);
+
+//=============== TOOLS ===============//
+long long   current_time(t_philo *philo);
+long long   get_time_of_day(void);
+void    ft_affichage(char *message, t_activity *data, t_philo *philo);
+
+//=========== OPERATIONS==========//
+void	ft_eating_case(philo, data);
 # endif
