@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:54:20 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/14 17:44:06 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/16 18:40:39 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,23 @@ enum e_philo_state
 {
 	FALSE,
 	TRUE,
-	SLEEPING,
-	EATING,
-	THINKING,
+	SHOULD_EAT,
+	DONE_ROUTINE,
 	TAKING_FORK,
 	DEAD
-}
+};
 
 typedef	struct s_philo
 {
 	int				id;
 	pthread_mutex_t	*l_hand;
 	pthread_mutex_t	*r_hand;
-	int				is_sleeping;
-	int				is_eating;
+	int				eating_routine;
 	int				taking_fork;
 	int				dead;
+	int				meals_counter;
 	long long		time_reference;
+	pthread_t		thread;
 }	t_philo;
 
 typedef struct s_activity
@@ -62,7 +62,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_print_error_msg(char *error_name, char *message);
 void	ft_helper_display(void);
 int		ft_atoi(const char *str);
-void	ft_check_pointing_cmd(int argc, char **argv, t_activity *data);
 void	ft_init_the_args(int argc, char **argv, t_activity *data);
 void    ft_init_philos(t_activity  *data);
 void    ft_init_mutex(t_activity *data);
@@ -73,7 +72,20 @@ void    *ft_philo_routine(void *arg);
 long long   current_time(t_philo *philo);
 long long   get_time_of_day(void);
 void    ft_affichage(char *message, t_activity *data, t_philo *philo);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 //=========== OPERATIONS==========//
-void	ft_eating_case(philo, data);
+void	ft_eating_case(t_philo *philo, t_activity *data);
+void    ft_fork_left(t_philo *philo);
+int		ft_get_fork(t_activity *info, t_philo *philo, int status);
+
+//===========PARSING=============//
+int	ft_parsing_core(int argc, char **argv, t_activity *data);
+void	ft_check_pointing_cmd(char **argv, t_activity *data);
+void	ft_init_the_args(int argc, char **argv, t_activity *data);
+
+//===========MAIN============//
+void	ft_helper_display(void);
+
 # endif

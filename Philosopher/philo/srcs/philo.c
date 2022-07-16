@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:54:16 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/13 12:02:30 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/16 17:16:00 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,20 @@ void	ft_helper_display(void)
 	ft_putstr_fd("<number_of_times_each_philosopher_must_eat> (optional)", 2);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
+	t_activity *data;
 	int	status;
 
+	data = ft_calloc(1, sizeof(t_activity));
 	status = VALID;
 	if (argc != 5 && argc != 6)
 	{
-		helper_display();
+		ft_helper_display();
 		return (STDERR_FILENO);
 	}
-	status = parsing_core();
+	status = ft_parsing_core(argc, argv, data);
 	// if (status = VALID)
 	// 	 execute_root function
+	return (0);
 }

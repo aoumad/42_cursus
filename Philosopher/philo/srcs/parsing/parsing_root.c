@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:10:18 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/13 17:55:21 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/16 17:42:25 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	ft_parsing_core(int argc, char **argv, t_activity *data)
 {
-	init_the_args(argc, argv, data);
-	check_pointing_cmd(argc, argv, data);
-	init_mutex(data);
-	init_philos(data);
+	ft_init_the_args(argc, argv, data);
+	ft_check_pointing_cmd(argv, data);
+	ft_init_mutex(data);
+	ft_init_philos(data);
+	return (0);
 }
 
 void	ft_init_the_args(int argc, char **argv, t_activity *data)
@@ -32,7 +33,7 @@ void	ft_init_the_args(int argc, char **argv, t_activity *data)
 		data->nbr_of_meals = 0;
 }
 
-void	ft_check_pointing_cmd(int argc, char **argv, t_activity *data)
+void	ft_check_pointing_cmd(char **argv, t_activity *data)
 {
 	int	status;
 

@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex_handling.c                                   :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 10:36:33 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/16 17:42:20 by aoumad           ###   ########.fr       */
+/*   Created: 2021/11/21 02:51:26 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/16 17:25:17 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void    ft_init_mutex(t_activity *data)
+void	*ft_calloc(size_t count, size_t size)
 {
-    int count;
-    pthread_mutex_t *mutex;
+	unsigned char	*add;
+	size_t			len;
 
-    pthread_mutex_init(&data->lock_print, NULL);
-    count = data->nbr_philos;
-    mutex = malloc(count * sizeof(pthread_mutex_t));
-    while (count--)
-        pthread_mutex_init(&mutex[count], NULL);
-    pthread_mutex_init(&data->lock_print, NULL);
+	len = count * size;
+	add = (unsigned char *)malloc(len);
+	if (!add)
+		return (NULL);
+	ft_bzero(add, len);
+	return (add);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*cast_var;
+	size_t			i;
+
+	i = 0;
+	cast_var = (unsigned char *)s;
+	while (i < n)
+		cast_var[i++] = 0;
 }

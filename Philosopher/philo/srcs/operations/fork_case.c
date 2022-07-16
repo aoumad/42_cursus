@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:06:47 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/14 17:32:47 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/15 09:58:53 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,10 @@ int ft_get_fork(t_activity *info, t_philo *philo, int status)
     }
     pthread_mutex_unlock(&info->lock_print); // i still need to check if i should unlock here or in another case
     return (status);
+}
+
+void    ft_fork_left(t_philo *philo)
+{
+    pthread_mutex_unlock(philo->l_hand);
+    pthread_mutex_unlock(philo->r_hand);
 }
