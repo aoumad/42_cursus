@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eating_case.c                                      :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 17:06:44 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/18 11:59:07 by aoumad           ###   ########.fr       */
+/*   Created: 2021/11/21 02:51:26 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/19 16:10:33 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "../../includes/philo_bonus.h"
 
-void    ft_eating_case(t_philo *philo)
+void	*ft_calloc(size_t count, size_t size)
 {
-    ft_affichage("is eating", philo);
-    ft_usleep(philo->data->time_to_eat); // converted from micro to milleseconds
-    philo->meals_counter++;
-    if (philo->meals_counter == philo->data->nbr_of_meals &&
-        philo->data->nbr_of_meals >= 1)
-        philo->eating_routine = DONE_ROUTINE;
+	unsigned char	*add;
+	size_t			len;
+
+	len = count * size;
+	add = (unsigned char *)malloc(len);
+	if (!add)
+		return (NULL);
+	ft_bzero(add, len);
+	return (add);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*cast_var;
+	size_t			i;
+
+	i = 0;
+	cast_var = (unsigned char *)s;
+	while (i < n)
+		cast_var[i++] = 0;
 }

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eating_case.c                                      :+:      :+:    :+:   */
+/*   destroy_mutex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 17:06:44 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/18 11:59:07 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/18 11:58:58 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/18 18:00:10 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void    ft_eating_case(t_philo *philo)
+void    ft_mutex_detach_destroy(t_activity *data)
 {
-    ft_affichage("is eating", philo);
-    ft_usleep(philo->data->time_to_eat); // converted from micro to milleseconds
-    philo->meals_counter++;
-    if (philo->meals_counter == philo->data->nbr_of_meals &&
-        philo->data->nbr_of_meals >= 1)
-        philo->eating_routine = DONE_ROUTINE;
+    int i;
+
+    i = 0;
+    while (i < data->nbr_philos)
+        pthread_mutex_destroy(&data->forks[i++]);
+    pthread_mutex_destroy(&data->lock_print);
 }
