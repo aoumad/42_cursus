@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:19:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/22 18:19:31 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/22 22:06:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef	struct s_philo
 	int				meals_counter;
     int             last_eat;
 	int				finish_routine;
-	long long		time_reference;
+	long			time_reference;
 	pthread_t		thread;
 	t_data		*data;
 }	t_philo;
@@ -72,6 +72,7 @@ void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 void	ft_putstr_fd(char *s, int fd);
 int     ft_is_digit(char *str);
+long	ft_get_time_of_day(void);
 
 //===========PARSING===========//
 void    ft_init_args(int argc, char **argv, t_data *data);
