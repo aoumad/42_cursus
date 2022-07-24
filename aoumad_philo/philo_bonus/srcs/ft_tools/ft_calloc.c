@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_args.c                                     :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 17:07:58 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 19:04:04 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/24 08:12:48 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/24 08:12:57 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/philo.h"
+#include "../../includes/philo_bonus.h"
 
-void    ft_init_args(int argc, char **argv, t_data *data)
+void	*ft_calloc(size_t count, size_t size)
 {
-    data->nbr_philos = ft_atoi(argv[1]);
-    data->time_to_die = ft_atoi(argv[2]);
-    data->time_to_eat = ft_atoi(argv[3]);
-    data->time_to_sleep = ft_atoi(argv[4]);
-    if (argc == 6)
-        data->nbr_of_meals = ft_atoi(argv[5]);
-    else
-        data->nbr_of_meals = 0;
+	unsigned char	*add;
+	size_t			len;
+
+	len = count * size;
+	add = (unsigned char *)malloc(len);
+	if (!add)
+		return (NULL);
+	ft_bzero(add, len);
+	return (add);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*cast_var;
+	size_t			i;
+
+	i = 0;
+	cast_var = (unsigned char *)s;
+	while (i < n)
+		cast_var[i++] = 0;
 }

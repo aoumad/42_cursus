@@ -6,11 +6,11 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:07:58 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 19:04:04 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/24 19:04:23 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/philo.h"
+# include "../../includes/philo_bonus.h"
 
 void    ft_init_args(int argc, char **argv, t_data *data)
 {

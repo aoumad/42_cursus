@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 16:21:34 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/23 18:26:27 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/24 15:26:34 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/24 15:26:58 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "../../includes/philo_bonus.h"
 
 void    ft_helper_display(void)
 {

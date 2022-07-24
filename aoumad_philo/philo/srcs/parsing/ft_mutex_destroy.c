@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_args.c                                     :+:      :+:    :+:   */
+/*   ft_mutex_destroy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 17:07:58 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 19:04:04 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/23 17:57:14 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/23 18:25:42 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/philo.h"
+#include "../../includes/philo.h"
 
-void    ft_init_args(int argc, char **argv, t_data *data)
+void    ft_mutex_destroy(t_data *data)
 {
-    data->nbr_philos = ft_atoi(argv[1]);
-    data->time_to_die = ft_atoi(argv[2]);
-    data->time_to_eat = ft_atoi(argv[3]);
-    data->time_to_sleep = ft_atoi(argv[4]);
-    if (argc == 6)
-        data->nbr_of_meals = ft_atoi(argv[5]);
-    else
-        data->nbr_of_meals = 0;
+    int i;
+
+    i = 0;
+    while (i < data->nbr_philos)
+        pthread_mutex_destroy(&data->forks[i++]);
+    pthread_mutex_destroy(data->lock_print);
 }

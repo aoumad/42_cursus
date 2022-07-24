@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_args.c                                     :+:      :+:    :+:   */
+/*   ft_eating_case.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 17:07:58 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 19:04:04 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/23 14:05:11 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/23 16:08:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/philo.h"
+#include "../../includes/philo.h"
 
-void    ft_init_args(int argc, char **argv, t_data *data)
+void    ft_eating_case(t_data *data)
 {
-    data->nbr_philos = ft_atoi(argv[1]);
-    data->time_to_die = ft_atoi(argv[2]);
-    data->time_to_eat = ft_atoi(argv[3]);
-    data->time_to_sleep = ft_atoi(argv[4]);
-    if (argc == 6)
-        data->nbr_of_meals = ft_atoi(argv[5]);
-    else
-        data->nbr_of_meals = 0;
+    if (data->philo->meals_counter == data->nbr_of_meals)
+        data->philo->all_ate--;
+    ft_affichage("is eating", data->philo, TRUE);
+    ft_usleep(data->time_to_eat);
+    data->philo->meals_counter++;
+    data->philo->last_eat = ft_get_time_of_day();
 }

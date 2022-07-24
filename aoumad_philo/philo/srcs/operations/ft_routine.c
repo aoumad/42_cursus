@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_args.c                                     :+:      :+:    :+:   */
+/*   ft_routine.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 17:07:58 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 19:04:04 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/23 11:39:35 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/23 18:12:32 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/philo.h"
+#include "../../includes/philo.h"
 
-void    ft_init_args(int argc, char **argv, t_data *data)
+void    *ft_routine(void *arg)
 {
-    data->nbr_philos = ft_atoi(argv[1]);
-    data->time_to_die = ft_atoi(argv[2]);
-    data->time_to_eat = ft_atoi(argv[3]);
-    data->time_to_sleep = ft_atoi(argv[4]);
-    if (argc == 6)
-        data->nbr_of_meals = ft_atoi(argv[5]);
-    else
-        data->nbr_of_meals = 0;
+    t_data *data;
+
+    data = (t_data *)arg;
+    if (data->philo->id & 1)
+        usleep(100);
+    while (1)
+    {
+        ft_taking_forks(data);
+        ft_eating_case(data);
+        ft_sleeping_thinking(data);
+    }
+    return (NULL);
 }

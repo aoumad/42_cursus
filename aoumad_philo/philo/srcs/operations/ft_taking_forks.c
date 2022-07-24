@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_mutex.c                                    :+:      :+:    :+:   */
+/*   ft_taking_forks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 17:27:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 19:20:48 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/23 13:45:24 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/23 16:09:11 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-int ft_mutex_init(t_data *data)
+void    ft_taking_forks(t_data *data)
 {
-    int count;
+    int status;
 
-    count = data->nbr_philos;
-    if (pthread_mutex_init(data->lock_print, NULL))
-        return (EXIT_FAILURE);
-    while (count--)
+    status =  0;
+    if (data->nbr_philos == 1)
+        status = 1;
+    pthread_mutex_lock(data->philo->l_hand);
+    ft_affichage("has taken a fork", data->philo, TRUE);
+    pthread_mutex_unlock(data->philo->l_hand);
+    if (status != 1)
     {
-        if (pthread_mutex_init(&data->forks[count], NULL))
-            return (EXIT_FAILURE);
+        pthread_mutex_lock(data->philo->r_hand);
+        ft_affichage("has taken a fork", data->philo, TRUE);
+        pthread_mutex_unlock(data->philo->r_hand);
     }
-    return (EXIT_SUCCESS);
 }

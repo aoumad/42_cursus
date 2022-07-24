@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:28:00 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/22 18:21:36 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/24 19:06:16 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int main(int argc, char **argv)
 {
     t_data  *data;
-
-    data = ft_calloc(1, t_data);
-    if (ft_valid_args(argc, argv, data) == EXIT_FAILURE)
+    data = ft_calloc(1, sizeof(*data));
+    if (ft_valid_args(argc, argv) == EXIT_FAILURE)
         return (EXIT_FAILURE);
     ft_init_args(argc, argv, data);
-    if (ft_check_pointing_cmd(ar) == EXIT_FAILURE)
+    if (ft_check_pointing_cmd(argc, argv, data) == EXIT_FAILURE)
         return (EXIT_FAILURE);
-    if (ft_init_mutex(data) == EXIT_FAILURE)
+    if (ft_mutex_init(data) == EXIT_FAILURE)
         return (EXIT_FAILURE);
+            printf("hello\n");
     ft_create_philos(data);
+    ft_mutex_destroy(data);
 }
