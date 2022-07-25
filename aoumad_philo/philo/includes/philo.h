@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:19:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/23 18:26:09 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/25 19:18:59 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_data
 	int	time_to_sleep;
 	int	nbr_of_meals;
     pthread_mutex_t	*forks;
-    pthread_mutex_t *lock_print;
+    // pthread_mutex_t lock_print;
 	t_philo	*philo;
 }	t_data;
 
@@ -56,12 +56,18 @@ typedef	struct s_philo
 	int				eating_routine;
 	int				taking_fork;
 	int				dead_time;
+	int				died;
 	int				meals_counter;
     long			last_eat;
 	int				finish_routine;
 	long			time_reference;
 	pthread_t		thread;
-	t_data		*data;
+	int	nbr_philos;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	nbr_of_meals;
+	pthread_mutex_t lock_print;
 }	t_philo;
 
 //===========TOOLS============//
@@ -82,11 +88,12 @@ void    ft_mutex_destroy(t_data *data);
 void    ft_create_philos(t_data *data);
 int		ft_mutex_init(t_data *data);
 int		ft_check_pointing_cmd(int argc, char **argv, t_data *data);
+void    ft_init_data(t_philo *philo, int nbr_philos, t_data *data);
 
 //==============OPERATIONS===========//
 void    *ft_routine(void *arg);
-void    ft_taking_forks(t_data *data);
-void    ft_eating_case(t_data *data);
-int		ft_death_checker(t_philo *philo, t_data *data);
-void    ft_sleeping_thinking(t_data *data);
+void    ft_taking_forks(t_philo *philo);
+void    ft_eating_case(t_philo *philo);
+void    *ft_death_checker(void  *arg);
+void    ft_sleeping_thinking(t_philo *philo);
 # endif

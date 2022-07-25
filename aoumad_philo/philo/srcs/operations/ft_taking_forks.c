@@ -6,26 +6,26 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 13:45:24 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/23 16:09:11 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/25 15:49:20 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void    ft_taking_forks(t_data *data)
+void    ft_taking_forks(t_philo *philo)
 {
     int status;
 
     status =  0;
-    if (data->nbr_philos == 1)
+    if (philo->nbr_philos == 1)
         status = 1;
-    pthread_mutex_lock(data->philo->l_hand);
-    ft_affichage("has taken a fork", data->philo, TRUE);
-    pthread_mutex_unlock(data->philo->l_hand);
+    pthread_mutex_lock(philo->l_hand);
+    pthread_mutex_lock(philo->r_hand);
+    ft_affichage("has taken a fork", philo, TRUE);
     if (status != 1)
     {
-        pthread_mutex_lock(data->philo->r_hand);
-        ft_affichage("has taken a fork", data->philo, TRUE);
-        pthread_mutex_unlock(data->philo->r_hand);
+        ft_affichage("has taken a fork", philo, TRUE);
     }
+    pthread_mutex_unlock(philo->l_hand);
+    pthread_mutex_unlock(philo->r_hand);
 }

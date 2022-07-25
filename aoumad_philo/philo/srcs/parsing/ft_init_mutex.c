@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:27:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 19:20:48 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/25 11:46:13 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int ft_mutex_init(t_data *data)
     int count;
 
     count = data->nbr_philos;
-    if (pthread_mutex_init(data->lock_print, NULL))
+    if (pthread_mutex_init(&data->philo->lock_print, NULL))
         return (EXIT_FAILURE);
+    data->forks = malloc(sizeof(pthread_mutex_t) * count);
     while (count--)
     {
         if (pthread_mutex_init(&data->forks[count], NULL))

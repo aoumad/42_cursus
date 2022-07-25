@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 11:39:35 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/23 18:12:32 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/25 19:17:17 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 void    *ft_routine(void *arg)
 {
-    t_data *data;
-
-    data = (t_data *)arg;
-    if (data->philo->id & 1)
-        usleep(100);
-    while (1)
+    t_philo *philo;
+    philo = (t_philo *)arg;
+    if (philo->id & 1)
+        usleep(500);
+    while (philo->died != DEAD && philo->all_ate != DONE_ROUTINE)
     {
-        ft_taking_forks(data);
-        ft_eating_case(data);
-        ft_sleeping_thinking(data);
+        ft_taking_forks(philo);
+        if (philo->nbr_philos == 1)
+        {
+            usleep(1000000);
+            break ;
+        }
+        ft_eating_case(philo);
+        ft_sleeping_thinking(philo);
     }
     return (NULL);
 }

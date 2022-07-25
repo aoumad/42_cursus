@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 07:55:33 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 17:23:10 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/25 16:31:29 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ typedef struct s_data
 	int	time_to_sleep;
 	int	nbr_of_meals;
     pid_t *pid_philo;
-    // pthread_mutex_t	*forks;
-    // pthread_mutex_t *lock_print;
 	t_philo	*philo;
 }	t_data;
 
@@ -55,8 +53,6 @@ typedef	struct s_philo
 {
 	int				id;
 	int				all_ate;
-	// pthread_mutex_t	*l_hand;
-	// pthread_mutex_t	*r_hand;
 	int				eating_routine;
 	int				taking_fork;
 	int				dead_time;
@@ -65,11 +61,15 @@ typedef	struct s_philo
 	int				finish_routine;
 	long			time_reference;
 	pthread_t		thread;
+		int	nbr_philos;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	nbr_of_meals;
 	sem_t	*write_sem;
 	sem_t	*forks;
 	sem_t	*eat_enough;
 	sem_t	*dead_sem;
-	t_data		*data;
 }	t_philo;
 
 //===========TOOLS============//

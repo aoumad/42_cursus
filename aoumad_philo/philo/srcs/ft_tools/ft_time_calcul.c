@@ -24,11 +24,11 @@ long	ft_get_time_of_day(void)
 
 void    ft_usleep(int ms)
 {
-    long long time;
+    long time;
 
     time = ft_get_time_of_day();
-    usleep(ms * 920);
+    usleep(ms * 0.9);
     // current_time is less than the previous time + time that i wanted to sleep?
     while (ft_get_time_of_day() < time + ms)
-        usleep(ms * 2);
+        usleep(50);
 }

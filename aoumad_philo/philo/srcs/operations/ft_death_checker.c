@@ -12,18 +12,21 @@
 
 #include "../../includes/philo.h"
 
-int ft_death_checker(t_philo *philo, t_data *data)
+void    *ft_death_checker(void  *arg)
 {
-    if (ft_get_time_of_day() - philo->last_eat >= data->time_to_die)
+    t_philo *philo;
+
+    philo = (t_philo *)arg;
+    if (ft_get_time_of_day() - philo->last_eat >= philo->time_to_die)
     {
         philo->dead_time = ft_get_time_of_day() - philo->time_reference;
         ft_affichage("is died", philo, DEAD);
-        return (DEAD);
+        philo->died= DEAD;
     }
     if (philo->all_ate == 0)
     {
         ft_affichage("All philosophers ate", philo, DONE_ROUTINE);
-        return (DONE_ROUTINE);
+        philo->eating_routine = DONE_ROUTINE;
     }
-    return (0);
+    return (NULL);
 }
