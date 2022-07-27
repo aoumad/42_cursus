@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:46:06 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 17:09:47 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/27 12:00:04 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 void    ft_eating_case(t_philo *philo)
 {
     philo->last_eat = ft_get_time_of_day();
-    if (philo->all_ate == 0)
+    if (philo->meals_counter == philo->nbr_philos)
     {
+        philo->all_ate = DONE_ROUTINE;
         sem_post(philo->forks);
         sem_post(philo->forks);
-        exit(EXIT_SUCCESS);
+        return ;
+        // exit(EXIT_SUCCESS);
     }
-    philo->all_ate--;
+    philo->meals_counter++;
     ft_affichage("is eating", philo, TRUE);
-    ft_usleep(philo->data->time_to_eat);
+    ft_usleep(philo->time_to_eat);
+    // usleep(philo->time_to_eat * 1000);
 }

@@ -6,7 +6,7 @@
 #    By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/20 23:35:41 by aoumad            #+#    #+#              #
-#    Updated: 2022/07/24 17:24:04 by aoumad           ###   ########.fr        #
+#    Updated: 2022/07/26 14:37:31 by aoumad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC		=	srcs/operations/ft_create_philos.c srcs/operations/ft_death_checker.c \
 
 CC 		= gcc
 
-FLAGS	= -Wall -Wextra -Werror -pthread
+FLAGS	= -g -Wall -Wextra -Werror -pthread
 
 OBJS 	= $(SRC:.c=.o)
 

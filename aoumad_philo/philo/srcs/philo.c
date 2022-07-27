@@ -6,11 +6,19 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:28:00 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/25 11:49:28 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/26 11:10:59 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+/*
+    c: to the next break point.
+    n: the next line of execution.
+    s: goes into the funciton.
+    p: prints.
+    q: exit
+*/
 
 int main(int argc, char **argv)
 {

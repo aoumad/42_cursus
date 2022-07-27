@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:45:34 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/24 15:23:24 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/27 12:00:11 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void    ft_sleeping_thinking(t_philo *philo)
 {
     ft_affichage("is sleeping", philo, TRUE);
-    ft_usleep(philo->data->time_to_sleep);
+    ft_usleep(philo->time_to_sleep);
+    // usleep(philo->time_to_sleep * 1000);
     ft_affichage("is thinking", philo, TRUE);
 }

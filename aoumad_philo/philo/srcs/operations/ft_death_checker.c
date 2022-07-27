@@ -23,10 +23,10 @@ void    *ft_death_checker(void  *arg)
         ft_affichage("is died", philo, DEAD);
         philo->died= DEAD;
     }
-    if (philo->all_ate == 0)
-    {
-        ft_affichage("All philosophers ate", philo, DONE_ROUTINE);
-        philo->eating_routine = DONE_ROUTINE;
-    }
+    // if (philo->all_ate == 0 && philo->nbr_of_meals != 0)
+    // {
+    //     ft_affichage("All philosophers ate", philo, DONE_ROUTINE);
+    //     philo->eating_routine = DONE_ROUTINE;
+    // }
     return (NULL);
 }

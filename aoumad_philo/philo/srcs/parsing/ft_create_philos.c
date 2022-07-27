@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 18:23:42 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/25 19:20:15 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/26 11:27:03 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void    ft_create_philos(t_data *data)
     while (i < data->nbr_philos)
     {
         data->philo[i].time_reference = ft_get_time_of_day();
-        // last_eat = data->philo[i].time_reference;
         data->philo[i].id = i;
         data->philo[i].l_hand = &data->forks[data->philo[i].id];
         data->philo[i].r_hand = &data->forks[(data->philo[i].id + 1) % data->nbr_philos];
@@ -44,14 +43,20 @@ void    ft_create_philos(t_data *data)
         i++;
         usleep(100);
     }
+    i = 0;
+    while (1)
+        {
+            if (ft_all_ate(&data->philo[i]) == DONE_ROUTINE)
+                i++;
+            if (i == data->nbr_philos - 1)
+            ft_affichage("All philosophers ate", data->philo, DONE_ROUTINE);
+            usleep(50);
+        }
 }
-//     while (1)
-//     {
-//         if (ft_death_checker(data, i) == DEAD)
-//             break;
-//         i++;
-//         if (i == data->nbr_philos - 1)
-//             i = 0;
-//         usleep(100);
-//     }
-// }
+
+int ft_all_ate(t_philo *philo)
+{
+    if (philo->all_ate == 0 && philo->nbr_of_meals != 0)
+        philo->eating_routine = DONE_ROUTINE;
+    return (philo->eating_routine);
+}

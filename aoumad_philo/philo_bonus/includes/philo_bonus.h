@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 07:55:33 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/25 16:31:29 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:57:00 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_data
 	int	nbr_of_meals;
     pid_t *pid_philo;
 	t_philo	*philo;
+	pthread_t thread;
 }	t_data;
 
 typedef	struct s_philo
@@ -91,9 +92,11 @@ int		ft_mutex_init(t_data *data);
 int		ft_check_pointing_cmd(int argc, char **argv, t_data *data);
 void    ft_init_semaphore(t_data *data);
 void    ft_kill_philos(t_data *data);
+void	waiting_pids(t_data *data);
+
 //==============OPERATIONS===========//
-void    *ft_philo_routine(void  *arg);
-int ft_death_checker(t_philo *philo, t_data *data);
+void    ft_philo_routine(t_philo *philo);
+void	*ft_death_checker(void	*arg);
 void    ft_eating_case(t_philo *philo);
 void    ft_create_philos(t_data *data);
 void    ft_launching_philos(t_data *data);
