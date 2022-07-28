@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:19:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/26 10:01:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:05:42 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void    ft_create_philos(t_data *data);
 int		ft_mutex_init(t_data *data);
 int		ft_check_pointing_cmd(int argc, char **argv, t_data *data);
 void    ft_init_data(t_philo *philo, int nbr_philos, t_data *data);
+// void    *ft_all_ate(void    *arg);
 int ft_all_ate(t_philo *philo);
 
 //==============OPERATIONS===========//

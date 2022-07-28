@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 13:58:03 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/25 15:49:46 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:43:15 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    ft_affichage(char *message, t_philo *philo, int status)
 {
     long   time;
-
+    (void)message;
     time = ft_get_time_of_day() - philo->time_reference;
     pthread_mutex_lock(&philo->lock_print);
     if (status == TRUE)

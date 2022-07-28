@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:32:09 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/27 12:01:22 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/28 16:23:52 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void    ft_usleep(int ms)
     usleep(ms * 900);
     // current_time is less than the previous time + time that i wanted to sleep?
     while (ft_get_time_of_day() < time + ms)
-        usleep(50);
+        usleep(30);
 }

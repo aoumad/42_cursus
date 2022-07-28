@@ -6,7 +6,7 @@
 #    By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/20 23:35:41 by aoumad            #+#    #+#              #
-#    Updated: 2022/07/26 11:29:11 by aoumad           ###   ########.fr        #
+#    Updated: 2022/07/28 09:57:29 by aoumad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC		=	srcs/operations/ft_death_checker.c srcs/operations/ft_eating_case.c \
 			srcs/ft_tools/ft_help_menu.c srcs/ft_tools/ft_isdigit.c 
 CC 		= gcc
 
-FLAGS	= -g -Wall -Wextra -Werror -pthread -fsanitize=address
+FLAGS	= -g -Wall -Wextra -Werror -pthread
 
 OBJS 	= $(SRC:.c=.o)
 

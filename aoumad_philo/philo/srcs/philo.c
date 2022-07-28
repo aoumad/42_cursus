@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:28:00 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/26 11:10:59 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/28 17:38:42 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int main(int argc, char **argv)
 {
     t_data  *data;
     data = ft_calloc(1, sizeof(*data));
-    data->philo = (t_philo *)malloc(sizeof(t_philo) * data->nbr_philos);
+    // data->philo = (t_philo *)malloc(sizeof(t_philo) * data->nbr_philos);
+    data->philo = ft_calloc(data->nbr_philos, sizeof(t_philo));
     if (ft_valid_args(argc, argv) == EXIT_FAILURE)
         return (EXIT_FAILURE);
     ft_init_args(argc, argv, data);
