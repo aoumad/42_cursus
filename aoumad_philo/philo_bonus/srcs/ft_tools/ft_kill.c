@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_time_calcul.c                                   :+:      :+:    :+:   */
+/*   ft_kill.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 19:32:09 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/29 15:29:55 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/20 19:53:03 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/29 15:55:58 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo_bonus.h"
 
-long	ft_get_time_of_day(void)
+void    ft_kill_philos(t_data *data)
 {
-	struct timeval	tp;
-	long			time_in_ms;
+    int i;
 
-	gettimeofday(&tp, NULL);
-	time_in_ms = tp.tv_sec * 1000 + tp.tv_usec / 1000;
-	return (time_in_ms);
-}
-
-void    ft_usleep(int ms)
-{
-    long long time;
-
-    time = ft_get_time_of_day();
-    usleep(ms * 900);
-    // current_time is less than the previous time + time that i wanted to sleep?
-    while (ft_get_time_of_day() < time + ms)
-        usleep(10);
+    i = 0;
+    while (i < data->nbr_philos)
+    {
+        kill(data->pid_philo[i], SIGKILL);
+        i++;
+    }
 }

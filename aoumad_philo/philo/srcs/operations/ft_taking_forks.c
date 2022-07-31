@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 13:45:24 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/28 18:33:42 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/31 21:52:44 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@ void    ft_taking_forks(t_philo *philo)
     status =  0;
     if (philo->nbr_philos == 1)
         status = 1;
-    pthread_mutex_lock(philo->l_hand);
+        pthread_mutex_lock(philo->l_hand);
     ft_affichage("has taken a fork", philo, TRUE);
-    if (status != 1)
-    {
-        pthread_mutex_lock(philo->r_hand);
+    pthread_mutex_lock(philo->r_hand);
+    // if (status != 1)
         ft_affichage("has taken a fork", philo, TRUE);
-        pthread_mutex_unlock(philo->r_hand);
-    }
-    pthread_mutex_unlock(philo->l_hand);
+    // pthread_mutex_unlock(philo->l_hand);
 }

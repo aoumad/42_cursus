@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:19:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/28 18:05:42 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/31 21:14:01 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ enum e_philo_state
 	FALSE,
 	TRUE,
 	DONE_ROUTINE,
-	DEAD
+	DEAD,
+	FORKS
 };
 
 typedef struct s_philo	t_philo;

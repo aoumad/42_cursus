@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 18:23:42 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/28 18:42:29 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/07/31 20:39:03 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,17 @@ void    ft_create_philos(t_data *data)
         data->philo[i].time_to_eat = data->time_to_eat;
         data->philo[i].time_to_sleep = data->time_to_sleep;
         data->philo[i].nbr_of_meals = data->nbr_of_meals;
-            // printf("philo has id : %d\n", data->philo[i].id);
-        if (pthread_create(&data->philo[i].thread, NULL, ft_routine, data->philo + i))
+        if (pthread_create(&data->philo[i].thread, NULL, ft_routine, &data->philo[i]))
             return ;
         if (pthread_create(&thread, NULL, ft_death_checker, &data->philo[i]))
             return ;
         pthread_detach(data->philo[i].thread);
         pthread_detach(thread);
         i++;
-        // usleep(100);
+        usleep(100);
     }
     i = 0;
-    while (1)
+    while (data->philo[i].died != DEAD)
         {
             if (ft_all_ate(&data->philo[i]) == DONE_ROUTINE)
                 i++;
@@ -55,13 +54,8 @@ void    ft_create_philos(t_data *data)
                 ft_affichage("All philosophers ate", data->philo, DONE_ROUTINE);
                 break;
             }
-            usleep(100);
+            // usleep(100);
         }
-    // if (data->nbr_of_meals  != 0)
-    // {
-    //     pthread_create(&thread, NULL, ft_all_ate, &data->philo);
-    //     pthread_detach(thread);
-    // }
 }
 int ft_all_ate(t_philo *philo)
 {
@@ -69,17 +63,3 @@ int ft_all_ate(t_philo *philo)
         philo->eating_routine = DONE_ROUTINE;
     return (philo->eating_routine);
 }
-
-// void    *ft_all_ate(void    *arg)
-// {
-//     t_philo *philo;
-
-//     philo = (t_philo *)arg;
-//     while (philo->died != DEAD)
-//     {
-//         printf("hahahahhaha\n");
-//         if (philo->all_ate == 0)
-//             philo->eating_routine = DONE_ROUTINE;
-//     }
-//     return (NULL);
-// }
