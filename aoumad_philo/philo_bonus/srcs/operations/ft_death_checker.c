@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 11:57:58 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/31 16:04:39 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/02 14:10:53 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,32 @@ void    *ft_death_checker(void  *arg)
     t_philo *philo;
 
     philo  = (t_philo *)arg;
-    // printf("get time of day is: %ld\n", ft_get_time_of_day());
-    // printf("last eat: %ld\n", philo->last_eat);
-    // printf("time to die: %d\n", philo->time_to_die);
     while (1)
     {
-    // printf("get time of day is: %ld\n", ft_get_time_of_day());
-    // printf("last eat: %ld\n", philo->last_eat);
-    // printf("time to die: %d\n", philo->time_to_die);
         // if (ft_get_time_of_day() - philo->last_eat >= (long)philo->time_to_die)
-        if (philo->last_eat + (long)philo->time_to_die < ft_get_time_of_day())
+        if (philo->time_to_kill <= ft_get_time_of_day())
         {
-            philo->dead_time = ft_get_time_of_day() - philo->time_reference;
-            ft_affichage("is died", philo, DEAD);
-            philo->finish_routine = DEAD;
-            exit(TRUE);
+            sem_wait(philo->data->dead_sem);
+            ft_affichage("is died", philo->philo_id, philo->data, DEAD);
+            sem_post(philo->data->dead_sem);
         }
-        usleep(5000);
+        usleep(100);
     }
     return (NULL);
+}
+
+void	*ft_eat_checker(void *ptr)
+{
+	t_philo	*philo;
+	int		i;
+
+	i = 0;
+	philo = (t_philo *)ptr;
+	while (i < philo->data->nbr_philos)
+	{
+		sem_wait(philo->data->eat_enough);
+		i++;
+	}
+	sem_post(philo->data->exit);
+	return  (NULL);
 }

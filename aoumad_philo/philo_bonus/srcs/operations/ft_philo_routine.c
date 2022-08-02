@@ -6,24 +6,27 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 10:02:13 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/30 15:43:56 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/02 13:58:58 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo_bonus.h"
 
-void    ft_philo_routine(t_philo *philo)
+void	ft_routine(t_philo *philo)
 {
-    if (philo->id & 1)
-        usleep(500);
-    while (philo->finish_routine != DEAD)
-    {
-        ft_taking_forks(philo);
-        ft_eating_case(philo);
-        sem_post(philo->forks);
-        sem_post(philo->forks);
-        ft_sleeping_thinking(philo);
-        usleep(1000);
-    }
-    return ;
+	sem_wait(philo->data->forks);
+	ft_affichage("has taken a fork", philo->philo_id, philo->data, TRUE);
+	sem_wait(philo->data->forks);
+	ft_affichage("has taken a fork", philo->philo_id, philo->data, TRUE);
+	philo->meals_counter++;
+	if (philo->meals_counter == philo->data->nbr_of_meals)
+		sem_post(philo->data->eat_enough);
+	philo->time_to_kill = ft_get_time_of_day() + philo->data->time_to_die;
+	ft_affichage("is eating", philo->philo_id, philo->data, TRUE);
+	ft_usleep(philo->data->time_to_eat);
+	ft_affichage("is sleeping", philo->philo_id, philo->data, TRUE);
+	sem_post(philo->data->forks);
+	sem_post(philo->data->forks);
+	ft_usleep(philo->data->time_to_sleep);
+	ft_affichage("is thinking", philo->philo_id, philo->data, TRUE);
 }

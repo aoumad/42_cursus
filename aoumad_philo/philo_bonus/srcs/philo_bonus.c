@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 08:02:02 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/29 20:00:37 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/02 12:15:21 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ int main(int argc, char **argv)
     if (ft_check_pointing_cmd(argc, argv, data) == EXIT_FAILURE)
         return (EXIT_FAILURE);
     ft_create_philos(data);
-    // ft_kill_philos(data);
 }

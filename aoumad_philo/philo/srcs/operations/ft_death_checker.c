@@ -25,6 +25,7 @@ void    *ft_death_checker(void  *arg)
             philo->died= DEAD;
             ft_affichage("is died", philo, DEAD);
         }
+        usleep(1000);
     }
     return (NULL);
 }
