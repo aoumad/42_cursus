@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 09:29:21 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/02 13:58:19 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/04 16:06:19 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,38 +67,18 @@
 //     waiting_pids(data);
 // }
 
-void	create_philos(t_philo *philo, t_data *data)
+void	ft_create_philos(t_data *data)
 {
-	int		i;
 	pid_t	*pid;
+	t_philo *philo;
 
-	i = 0;
-	philo = (t_philo *)malloc(sizeof(t_philo) * data->nbr_of_meals);
+	philo = (t_philo *)malloc(sizeof(t_philo) * data->nbr_philos);
 	pid = (pid_t *)malloc(sizeof(int) * data->nbr_philos);
-	i = 0;
+	ft_init_semaphore(data);
 	data->time_reference = ft_get_time_of_day();
 	ft_launching_philos(philo, data, pid);
 	sem_wait(data->exit);
 	ft_kill(data, &pid, philo);
-}
-
-void	ft_kill(t_data *data, int **pid, t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	sem_close(data->eat_enough);
-	sem_close(data->forks);
-	sem_close(data->write_sem);
-	sem_close(data->dead_sem);
-	sem_close(data->exit);
-	while (i < data->nbr_philos)
-	{
-		kill((*pid)[i], SIGKILL);
-		i++;
-	}
-	free(philo);
-	free(*pid);
 }
 
 void    ft_launching_philos(t_philo *philo, t_data *data, pid_t *pid)
@@ -110,23 +90,31 @@ void    ft_launching_philos(t_philo *philo, t_data *data, pid_t *pid)
 	while (i < data->nbr_philos)
 	{
 		pid[i] = fork();
-		philo[i].philo_id = i + 1;
+		philo[i].last_eat = ft_get_time_of_day();
+		
 		philo[i].data = data;
-		if (pid[i] == 0)
+		if (pid[i] == -1)
+        {
+            while (--i >= 0)
+                kill(data->pid_philo[i], SIGKILL);
+            exit (1);
+        }
+		else if (pid[i] == 0)
 		{
-			start_philo(&philo[i]); // hna fin wslt
-			break ;
+			philo[i].philo_id = i + 1;
+			start_philo(&philo[i]);
+			// break ;
 		}
 		i++;
 	}
-	if (philo->data->nbr_of_meals != -1)
+	if (philo->data->nbr_of_meals != 0)
 	{
-		if (pthread_create(&thread, NULL, ft_death_checker, philo) != 0)
-		{
-			printf("Unable to create a thread!!");
-			exit(TRUE);
-		}
-		pthread_detach(thread);
+			if (pthread_create(&thread, NULL, ft_eat_checker, philo) != 0)
+			{
+				printf("Unable to create a thread!!");
+				exit(TRUE);
+			}
+			pthread_detach(thread);
 	}
 }
 
@@ -143,12 +131,13 @@ void	*start_philo(void *arg)
 		exit(TRUE);
 	}
 	pthread_detach(thread);
-	if (philo->philo_id % 2 == 0)
-	{
-		usleep(100);
-	}
+	if (philo->philo_id & 1)
+        usleep(200);
 	philo->meals_counter = 0 ;
 	while (1)
+	{
 		ft_routine(philo);
+		usleep(100);
+	}
 	return (NULL);
 }

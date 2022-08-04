@@ -2,14 +2,10 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/aoumad/Desktop/philo_bonus'
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/operations/ft_create_philos.c -o srcs/operations/ft_create_philos.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/operations/ft_death_checker.c -o srcs/operations/ft_death_checker.o
-gcc -g -Wall -Wextra -Werror -pthread -c srcs/operations/ft_eating_case.c -o srcs/operations/ft_eating_case.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/operations/ft_philo_routine.c -o srcs/operations/ft_philo_routine.o
-gcc -g -Wall -Wextra -Werror -pthread -c srcs/operations/ft_sleeping_thinking.c -o srcs/operations/ft_sleeping_thinking.o
-gcc -g -Wall -Wextra -Werror -pthread -c srcs/operations/ft_taking_forks.c -o srcs/operations/ft_taking_forks.o
- 
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/parsing/ft_init_args.c -o srcs/parsing/ft_init_args.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/parsing/ft_init_semaphore.c -o srcs/parsing/ft_init_semaphore.o
-gcc -g -Wall -Wextra -Werror -pthread -c srcs/parsing/ft_kill_philos.c -o srcs/parsing/ft_kill_philos.o
+gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_kill.c -o srcs/ft_tools/ft_kill.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/parsing/ft_valid_args.c -o srcs/parsing/ft_valid_args.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_atoi.c -o srcs/ft_tools/ft_atoi.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_calloc.c -o srcs/ft_tools/ft_calloc.o
@@ -18,6 +14,6 @@ gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_time_calcul.c -o srcs/
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_putstr_fd.c -o srcs/ft_tools/ft_putstr_fd.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_help_menu.c -o srcs/ft_tools/ft_help_menu.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/philo_bonus.c -o srcs/philo_bonus.o
-gcc -g -Wall -Wextra -Werror -pthread srcs/operations/ft_create_philos.c srcs/operations/ft_death_checker.c srcs/operations/ft_eating_case.c srcs/operations/ft_philo_routine.c srcs/operations/ft_sleeping_thinking.c srcs/operations/ft_taking_forks.c srcs/parsing/ft_init_args.c srcs/parsing/ft_init_semaphore.c srcs/parsing/ft_kill_philos.c srcs/parsing/ft_valid_args.c srcs/ft_tools/ft_atoi.c srcs/ft_tools/ft_calloc.c srcs/ft_tools/ft_cout.c srcs/ft_tools/ft_time_calcul.c srcs/ft_tools/ft_putstr_fd.c srcs/ft_tools/ft_help_menu.c srcs/philo_bonus.c -o philo_bonus
+gcc -g -Wall -Wextra -Werror -pthread srcs/operations/ft_create_philos.c srcs/operations/ft_death_checker.c srcs/operations/ft_philo_routine.c srcs/parsing/ft_init_args.c srcs/parsing/ft_init_semaphore.c srcs/ft_tools/ft_kill.c srcs/parsing/ft_valid_args.c srcs/ft_tools/ft_atoi.c srcs/ft_tools/ft_calloc.c srcs/ft_tools/ft_cout.c srcs/ft_tools/ft_time_calcul.c srcs/ft_tools/ft_putstr_fd.c srcs/ft_tools/ft_help_menu.c srcs/philo_bonus.c -o philo_bonus
 make: Leaving directory `/Users/aoumad/Desktop/philo_bonus'
  

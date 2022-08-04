@@ -6,22 +6,20 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 07:55:33 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/02 14:11:16 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/04 16:08:06 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <limits.h>
-# include <sys/time.h>
-# include <fcntl.h>
-# include <sys/stat.h>
 # include <semaphore.h>
+# include <sys/time.h>
+# include <stdlib.h>
+# include <string.h>
+# include <pthread.h>
+# include <unistd.h>
 # include <signal.h>
 
 # define	ERROR 0
@@ -89,7 +87,7 @@ void    ft_usleep(int ms);
 //===========PARSING===========//
 void    ft_init_args(int argc, char **argv, t_data *data);
 int		ft_valid_args(int argc, char **argv);
-void    ft_create_philos(t_data *data);
+void	ft_create_philos(t_data *data);
 int		ft_mutex_init(t_data *data);
 int		ft_check_pointing_cmd(int argc, char **argv, t_data *data);
 void    ft_init_semaphore(t_data *data);
@@ -101,10 +99,10 @@ void	waiting_pids(t_data *data);
 void	ft_routine(t_philo *philo);
 void	*ft_death_checker(void	*arg);
 void    ft_eating_case(t_philo *philo);
-void    ft_create_philos(t_data *data);
 void    ft_launching_philos(t_philo *philo, t_data *data, pid_t *pid);
 void    ft_sleeping_thinking(t_philo *philo);
 void    ft_taking_forks(t_philo *philo);
 void	*start_philo(void *arg);
+void	*ft_eat_checker(void *ptr);
 
 # endif

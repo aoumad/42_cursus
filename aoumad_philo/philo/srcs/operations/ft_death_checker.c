@@ -12,20 +12,21 @@
 
 #include "../../includes/philo.h"
 
-void    *ft_death_checker(void  *arg)
+void	*ft_death_checker(void *arg)
 {
-    t_philo *philo;
+	t_philo	*philo;
 
-    philo = (t_philo *)arg;
-    while (philo->died != DEAD)
-    {
-        if (ft_get_time_of_day() - philo->last_eat >= philo->time_to_die)
-        {
-            philo->dead_time = ft_get_time_of_day() - philo->time_reference;
-            philo->died= DEAD;
-            ft_affichage("is died", philo, DEAD);
-        }
-        usleep(1000);
-    }
-    return (NULL);
+	philo = (t_philo *)arg;
+	while (philo->died != DEAD)
+	{
+		if (ft_get_time_of_day() - philo->last_eat >= philo->time_to_die)
+		{
+			pthread_mutex_lock(&philo->lock_dead);
+			philo->dead_time = ft_get_time_of_day() - philo->time_reference;
+			philo->died = DEAD;
+			ft_affichage("is died", philo, DEAD);
+		}
+		usleep(100);
+	}
+	return (NULL);
 }
