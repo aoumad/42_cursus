@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 08:01:26 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 16:05:38 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/05 18:56:57 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void    ft_init_semaphore(t_data *data)
 {
-    sem_unlink("/forks");
+    if(sem_unlink("/forks"))
+		printf("hchoma\n");
 	data->forks = sem_open("/forks", O_CREAT, 0777, data->nbr_philos);
 	sem_unlink("/write_sem");
 	data->write_sem = sem_open("/write_sem", O_CREAT, 0777, 1);
-	sem_wait(data->write_sem);
-	sem_unlink("/ext");
+	sem_unlink("/exit");
 	data->exit = sem_open("/exit", O_CREAT, 0777, 0);
 	sem_unlink("/dead_sem");
 	data->dead_sem = sem_open("/dead_sem", O_CREAT, 0777, 1);

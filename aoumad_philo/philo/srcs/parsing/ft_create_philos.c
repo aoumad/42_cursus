@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 18:23:42 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 18:49:01 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/05 09:55:16 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	ft_create_philos(t_data *data)
 	while (i < data->nbr_philos)
 	{
 		data->philo->all_ate = FALSE;
+		ft_init_philos(&data->philo[i], time_reference, data);
 		data->philo[i].id = i;
-		ft_init_philos(data->philo + i, time_reference, data);
+		data->philo[i].l_hand = &data->forks[data->philo[i].id];
+		data->philo[i].r_hand = \
+			&data->forks[(data->philo[i].id + 1) % data->nbr_philos];
 		if (pthread_create(&data->philo[i].thread, NULL,
 				ft_routine, &data->philo[i]))
 			return ;
@@ -34,7 +37,7 @@ void	ft_create_philos(t_data *data)
 		pthread_detach(data->philo[i].thread);
 		pthread_detach(thread);
 		i++;
-		usleep(500);
+		usleep(400);
 	}
 	ft_check_all_ate(data);
 }
@@ -42,11 +45,8 @@ void	ft_create_philos(t_data *data)
 void	ft_init_philos(t_philo *philo, long time_reference, t_data *data)
 {
 	philo->time_reference = time_reference;
-	philo->l_hand = &data->forks[data->philo[i].id];
-	philo->r_hand = \
-		&data->forks[(data->philo[i].id + 1) % data->nbr_philos];
 	philo->meals_counter = 0;
-	philo->last_eat = data->philo[i].time_reference;
+	philo->last_eat = time_reference;
 	philo->died = FALSE;
 	philo->eating_routine = FALSE;
 	philo->nbr_philos = data->nbr_philos;

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 09:29:21 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 16:06:19 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/05 18:57:25 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void    ft_launching_philos(t_philo *philo, t_data *data, pid_t *pid)
 	{
 		pid[i] = fork();
 		philo[i].last_eat = ft_get_time_of_day();
-		
+		philo[i].time_to_die = data->time_to_die;
 		philo[i].data = data;
 		if (pid[i] == -1)
         {
@@ -103,7 +103,6 @@ void    ft_launching_philos(t_philo *philo, t_data *data, pid_t *pid)
 		{
 			philo[i].philo_id = i + 1;
 			start_philo(&philo[i]);
-			// break ;
 		}
 		i++;
 	}
@@ -131,13 +130,10 @@ void	*start_philo(void *arg)
 		exit(TRUE);
 	}
 	pthread_detach(thread);
-	if (philo->philo_id & 1)
-        usleep(200);
 	philo->meals_counter = 0 ;
 	while (1)
 	{
 		ft_routine(philo);
-		usleep(100);
 	}
 	return (NULL);
 }

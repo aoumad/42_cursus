@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 13:58:03 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 19:05:41 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/05 16:28:35 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_affichage(char *message, t_philo *philo, int status)
 	if (status == DEAD)
 	{
 		printf("%d\t%d\t%s\n", philo->dead_time, philo->id + 1, message);
+		
+		ft_putstr_fd(message, STDOUT_FILENO);
 		pthread_mutex_lock(&philo->lock_print);
 	}
 }

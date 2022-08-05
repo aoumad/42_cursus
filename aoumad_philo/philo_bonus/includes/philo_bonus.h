@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 07:55:33 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 16:08:06 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/05 11:31:25 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ typedef	struct s_philo
     long			last_eat;
 	int				finish_routine;
 	pthread_t		thread;
-		int	nbr_philos;
+	int	nbr_philos;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	nbr_of_meals;
-	t_data *data;
+	t_data	*data;
 }	t_philo;
 
 //===========TOOLS============//

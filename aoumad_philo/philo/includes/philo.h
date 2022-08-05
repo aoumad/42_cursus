@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:19:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 18:37:36 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/05 09:27:40 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void	ft_eating_case(t_philo *philo);
 void	*ft_death_checker(void *arg);
 void	ft_sleeping_thinking(t_philo *philo);
 void	ft_check_all_ate(t_data *data);
+void	ft_init_philos(t_philo *philo, long time_reference, t_data *data);
 
 #endif

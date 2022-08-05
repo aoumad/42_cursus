@@ -7,6 +7,7 @@ gcc -g -Wall -Wextra -Werror -pthread -c srcs/parsing/ft_init_args.c -o srcs/par
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/parsing/ft_init_semaphore.c -o srcs/parsing/ft_init_semaphore.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_kill.c -o srcs/ft_tools/ft_kill.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/parsing/ft_valid_args.c -o srcs/parsing/ft_valid_args.o
+ 
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_atoi.c -o srcs/ft_tools/ft_atoi.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_calloc.c -o srcs/ft_tools/ft_calloc.o
 gcc -g -Wall -Wextra -Werror -pthread -c srcs/ft_tools/ft_cout.c -o srcs/ft_tools/ft_cout.o

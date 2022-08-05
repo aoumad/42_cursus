@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 09:34:10 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 16:10:31 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/05 18:56:39 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void    ft_affichage(char *message, int philo_id, t_data *data, int status)
     {
         printf("%ld\t%d\t%s\n", time, philo_id, message);
     }
+    else
+        sem_post(data->write_sem);
     return ;
 }
