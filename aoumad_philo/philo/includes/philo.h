@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:19:32 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/05 09:27:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/07 17:37:52 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nbr_of_meals;
+	int				died;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 }	t_data;
@@ -56,7 +57,6 @@ typedef struct s_philo
 	int				eating_routine;
 	int				taking_fork;
 	int				dead_time;
-	int				died;
 	int				meals_counter;
 	long			last_eat;
 	int				finish_routine;
@@ -69,6 +69,7 @@ typedef struct s_philo
 	int				nbr_of_meals;
 	pthread_mutex_t	lock_print;
 	pthread_mutex_t	lock_dead;
+	t_data			*data;
 }	t_philo;
 void	ft_helper_display(void);
 int		ft_atoi(const char *str);
@@ -93,6 +94,6 @@ void	ft_eating_case(t_philo *philo);
 void	*ft_death_checker(void *arg);
 void	ft_sleeping_thinking(t_philo *philo);
 void	ft_check_all_ate(t_data *data);
-void	ft_init_philos(t_philo *philo, long time_reference, t_data *data);
+void	ft_init_philos(t_philo *philo, t_data *data);
 
 #endif

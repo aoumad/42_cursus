@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 18:23:42 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/05 09:55:16 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/07 18:17:42 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,23 @@ void	ft_create_philos(t_data *data)
 {
 	pthread_t	thread;
 	int			i;
-	long		time_reference;
 
 	i = 0;
 	data->philo = (t_philo *)malloc(sizeof(t_philo) * data->nbr_philos);
-	time_reference = ft_get_time_of_day();
+	if (ft_mutex_init(data) == EXIT_FAILURE)
+		exit(EXIT_FAILURE);
 	while (i < data->nbr_philos)
 	{
 		data->philo->all_ate = FALSE;
-		ft_init_philos(&data->philo[i], time_reference, data);
+		ft_init_philos(&data->philo[i], data);
 		data->philo[i].id = i;
 		data->philo[i].l_hand = &data->forks[data->philo[i].id];
 		data->philo[i].r_hand = \
 			&data->forks[(data->philo[i].id + 1) % data->nbr_philos];
-		if (pthread_create(&data->philo[i].thread, NULL,
-				ft_routine, &data->philo[i]))
-			return ;
-		if (pthread_create(&thread, NULL, ft_death_checker, &data->philo[i]))
-			return ;
+		pthread_create(&data->philo[i].thread, NULL, ft_routine,
+			&data->philo[i]);
 		pthread_detach(data->philo[i].thread);
+		pthread_create(&thread, NULL, ft_death_checker, &data->philo[i]);
 		pthread_detach(thread);
 		i++;
 		usleep(400);
@@ -42,13 +40,13 @@ void	ft_create_philos(t_data *data)
 	ft_check_all_ate(data);
 }
 
-void	ft_init_philos(t_philo *philo, long time_reference, t_data *data)
+void	ft_init_philos(t_philo *philo, t_data *data)
 {
-	philo->time_reference = time_reference;
+	philo->time_reference = ft_get_time_of_day();
 	philo->meals_counter = 0;
-	philo->last_eat = time_reference;
-	philo->died = FALSE;
+	philo->last_eat = ft_get_time_of_day();
 	philo->eating_routine = FALSE;
+	philo->data = data;
 	philo->nbr_philos = data->nbr_philos;
 	philo->time_to_die = data->time_to_die;
 	philo->time_to_eat = data->time_to_eat;
@@ -61,11 +59,11 @@ void	ft_check_all_ate(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->philo[i].died != DEAD)
+	while (data->died != DEAD)
 	{
 		if (ft_all_ate(&data->philo[i]) == DONE_ROUTINE)
 			i++;
-		if (i == data->nbr_philos - 1)
+		if (i == data->nbr_philos - 1 && data->nbr_philos != 1)
 		{
 			ft_affichage("All philosophers ate", data->philo, DONE_ROUTINE);
 			break ;

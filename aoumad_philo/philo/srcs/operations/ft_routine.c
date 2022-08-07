@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 11:39:35 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/04 19:02:51 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/07 17:38:39 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id & 1)
-		usleep(100);
-	while (philo->died != DEAD && philo->all_ate != DONE_ROUTINE)
+		usleep(50);
+	while (philo->data->died != DEAD && philo->all_ate != DONE_ROUTINE)
 	{
 		ft_taking_forks(philo);
 		ft_eating_case(philo);

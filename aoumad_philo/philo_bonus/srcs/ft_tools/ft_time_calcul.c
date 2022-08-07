@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:32:09 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/29 15:29:55 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/07 18:48:39 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ long	ft_get_time_of_day(void)
 	return (time_in_ms);
 }
 
-void    ft_usleep(int ms)
+void	ft_usleep(int ms)
 {
-    long long time;
+	long	time;
 
-    time = ft_get_time_of_day();
-    usleep(ms * 900);
-    // current_time is less than the previous time + time that i wanted to sleep?
-    while (ft_get_time_of_day() < time + ms)
-        usleep(10);
+	time = ft_get_time_of_day();
+	usleep(ms * 900);
+	while (ft_get_time_of_day() < time + ms)
+		usleep(20);
 }

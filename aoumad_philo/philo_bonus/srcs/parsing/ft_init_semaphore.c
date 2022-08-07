@@ -6,23 +6,23 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 08:01:26 by aoumad            #+#    #+#             */
-/*   Updated: 2022/08/05 18:56:57 by aoumad           ###   ########.fr       */
+/*   Updated: 2022/08/07 13:29:42 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo_bonus.h"
 
-void    ft_init_semaphore(t_data *data)
+void	ft_init_semaphore(t_data *data)
 {
-    if(sem_unlink("/forks"))
-		printf("hchoma\n");
-	data->forks = sem_open("/forks", O_CREAT, 0777, data->nbr_philos);
+	sem_unlink("/forks");
+	data->forks = sem_open("/forks", O_CREAT, 0644, data->nbr_philos);
 	sem_unlink("/write_sem");
-	data->write_sem = sem_open("/write_sem", O_CREAT, 0777, 1);
+	data->write_sem = sem_open("/write_sem", O_CREAT, 0644, 1);
 	sem_unlink("/exit");
-	data->exit = sem_open("/exit", O_CREAT, 0777, 0);
+	data->exit = sem_open("/exit", O_CREAT, 0644, 0);
 	sem_unlink("/dead_sem");
-	data->dead_sem = sem_open("/dead_sem", O_CREAT, 0777, 1);
-	sem_unlink("/eat_enough");
-	data->eat_enough = sem_open("/eat_enough", O_CREAT, 0777, 0);
+	data->dead_sem = sem_open("/dead_sem", O_CREAT, 0644, 1);
+	if (sem_unlink("/eat_enough"))
+		puts("not eat enough0");
+	data->eat_enough = sem_open("/eat_enough", O_CREAT, 0644, 0);
 }
