@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 15:54:20 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/19 16:52:42 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/22 16:19:32 by aoumad            #+#    #+#             */
+/*   Updated: 2022/08/07 17:37:52 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,81 +21,79 @@
 # include <sys/time.h>
 # include <semaphore.h>
 
-# define	ERROR 0
-# define	VALID 1
-# define	L_MAX 9223372036854775807
+# define ERROR 0
+# define VALID 1
+# define L_MAX 9223372036854775807
 
 enum e_philo_state
 {
 	FALSE,
 	TRUE,
-	SHOULD_EAT,
 	DONE_ROUTINE,
-	TAKING_FORK,
-	DEAD
+	DEAD,
+	FORKS
 };
 
 typedef struct s_philo	t_philo;
 
-typedef struct s_activity
+typedef struct s_data
 {
-	int	nbr_philos;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	nbr_of_meals;
+	int				nbr_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				nbr_of_meals;
+	int				died;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	lock_print;
-	t_philo	*philo;
-}	t_activity;
+	t_philo			*philo;
+}	t_data;
 
-typedef	struct s_philo
+typedef struct s_philo
 {
 	int				id;
+	int				all_ate;
 	pthread_mutex_t	*l_hand;
 	pthread_mutex_t	*r_hand;
 	int				eating_routine;
 	int				taking_fork;
-	int				dead;
+	int				dead_time;
 	int				meals_counter;
+	long			last_eat;
 	int				finish_routine;
-	long long		time_reference;
+	long			time_reference;
 	pthread_t		thread;
-	t_activity		*data;
+	int				nbr_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				nbr_of_meals;
+	pthread_mutex_t	lock_print;
+	pthread_mutex_t	lock_dead;
+	t_data			*data;
 }	t_philo;
-
-void	ft_putstr_fd(char *s, int fd);
-void	ft_print_error_msg(char *error_name, char *message);
+void	ft_helper_display(void);
 int		ft_atoi(const char *str);
-void	ft_init_the_args(int argc, char **argv, t_activity *data);
-void    ft_init_philos(t_activity  *data);
-void    ft_init_mutex(t_activity *data);
-
-void    *ft_philo_routine(void *arg);
-
-//=============== TOOLS ===============//
-long long   ft_current_time(t_philo *philo);
-long long   ft_get_time_of_day(void);
-void    ft_usleep(int ms);
-void    ft_affichage(char *message, t_philo *philo);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
-
-//=========== OPERATIONS==========//
+void	ft_putstr_fd(char *s, int fd);
+int		ft_is_digit(char *str);
+long	ft_get_time_of_day(void);
+void	ft_affichage(char *message, t_philo *philo, int status);
+void	ft_usleep(int ms);
+void	ft_init_args(int argc, char **argv, t_data *data);
+int		ft_valid_args(int argc, char **argv);
+void	ft_mutex_destroy(t_data *data);
+void	ft_create_philos(t_data *data);
+int		ft_mutex_init(t_data *data);
+int		ft_check_pointing_cmd(int argc, char **argv, t_data *data);
+void	ft_init_data(t_philo *philo, int nbr_philos, t_data *data);
+int		ft_all_ate(t_philo *philo);
+void	*ft_routine(void *arg);
+void	ft_taking_forks(t_philo *philo);
 void	ft_eating_case(t_philo *philo);
-void    ft_fork_left(t_philo *philo);
-int		ft_get_fork(t_philo *philo, int status);
-void    ft_sleeping_case(t_philo *philo);
-void	ft_mutex_detach_destroy(t_activity *data);
-void    *ft_dead_philo(void *arg);
-void    *ft_is_hungry(void *arg);
+void	*ft_death_checker(void *arg);
+void	ft_sleeping_thinking(t_philo *philo);
+void	ft_check_all_ate(t_data *data);
+void	ft_init_philos(t_philo *philo, t_data *data);
 
-//===========PARSING=============//
-int		ft_code_core(int argc, char **argv, t_activity *data);
-void	ft_check_pointing_cmd(char **argv, t_activity *data);
-void	ft_init_the_args(int argc, char **argv, t_activity *data);
-
-//===========MAIN============//
-void	ft_helper_display(void);
-
-# endif
+#endif

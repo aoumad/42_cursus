@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 15:54:16 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/18 16:59:58 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/22 16:28:00 by aoumad            #+#    #+#             */
+/*   Updated: 2022/08/07 18:35:02 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_activity *data;
-	int	status;
+	t_data	*data;
 
-	data = ft_calloc(1, sizeof(t_activity));
-	status = VALID;
-	if (argc != 5 && argc != 6)
-	{
-		ft_helper_display();
-		return (STDERR_FILENO);
-	}
-	status = ft_code_core(argc, argv, data);
-	ft_mutex_detach_destroy(data);
+	data = ft_calloc(1, sizeof(*data));
+	if (ft_valid_args(argc, argv) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	ft_init_args(argc, argv, data);
+	if (ft_check_pointing_cmd(argc, argv, data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	ft_create_philos(data);
+	ft_mutex_destroy(data);
+	free(data->philo);
 	free(data->forks);
 	free(data);
-	return (0);
 }

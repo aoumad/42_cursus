@@ -5,35 +5,43 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/16 14:17:20 by aoumad            #+#    #+#              #
-#    Updated: 2022/07/18 17:01:12 by aoumad           ###   ########.fr        #
+#    Created: 2022/07/20 23:35:41 by aoumad            #+#    #+#              #
+#    Updated: 2022/07/28 09:57:29 by aoumad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= philo
+NAME = philo
 
-SRCS	=	srcs/parsing/parsing_root.c srcs/tools/ft_atoi.c srcs/tools/ft_error.c \
-			srcs/tools/ft_putstr_fd.c srcs/philo.c srcs/tools/ft_calloc.c srcs/parsing/mutex_handling.c \
-			srcs/parsing/init_philos.c srcs/tools/ft_gettimeofday.c srcs/operations/cases_root.c srcs/operations/eating_case.c \
-			srcs/operations/fork_case.c srcs/operations/sleeping_case.c \
-			srcs/tools/ft_cout.c srcs/operations/destroy_mutex.c
-OBJS	= $(SRCS:.c=.o)
-MAIN	= srcs/philo.c
+INC 	= includes/philo.h
 
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+SRC		=	srcs/operations/ft_death_checker.c srcs/operations/ft_eating_case.c \
+			srcs/operations/ft_routine.c srcs/operations/ft_sleeping_thinking.c \
+			srcs/operations/ft_taking_forks.c srcs/parsing/ft_init_args.c \
+			srcs/parsing/ft_mutex_destroy.c srcs/parsing/ft_init_mutex.c \
+			srcs/parsing/ft_create_philos.c srcs/parsing/ft_valid_args.c \
+			srcs/ft_tools/ft_atoi.c srcs/ft_tools/ft_calloc.c srcs/ft_tools/ft_cout.c \
+			srcs/ft_tools/ft_time_calcul.c srcs/ft_tools/ft_putstr_fd.c srcs/philo.c \
+			srcs/ft_tools/ft_help_menu.c srcs/ft_tools/ft_isdigit.c 
+CC 		= gcc
 
-%.o : 		%.c
-			$(CC) $(CFLAGS) -c $< -o $@
+FLAGS	= -g -Wall -Wextra -Werror -pthread
 
-all:		$(NAME)
+OBJS 	= $(SRC:.c=.o)
 
-${NAME}:	${OBJS} includes/philo.h
-				@${CC} ${OBJS} -o ${NAME}
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+
+all: $(NAME) $(OBJS) $(INC)
+
+%.o: %.c $(INC)
+		$(CC) $(FLAGS) -c $< -o $@
+
 clean:
-				@rm -f ${OBJS}
-				
-fclean:		clean
-				@rm -f ${NAME}
-				
-re:			fclean all
+	rm -rf $(OBJS)
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re

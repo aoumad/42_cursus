@@ -5,37 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 16:08:48 by aoumad            #+#    #+#             */
-/*   Updated: 2022/07/19 16:32:57 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/24 08:02:02 by aoumad            #+#    #+#             */
+/*   Updated: 2022/08/07 10:26:04 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo_bonus.h"
 
-void    ft_helper_dispplay(void)
+int	main(int argc, char **argv)
 {
-    ft_putstr_fd(" ____________________________________________________\n", 2);
-	ft_putstr_fd("|            Please enter 4 or 5 arguments           |\n", 2);
-	ft_putstr_fd("|____________________________________________________|\n", 2);
-	ft_putstr_fd("|             [1][Number of philosophers]            |\n", 2);
-	ft_putstr_fd("|             [2][Time to die]                       |\n", 2);
-	ft_putstr_fd("|             [3][Time to eat]                       |\n", 2);
-	ft_putstr_fd("|             [4][Time to sleep]                     |\n", 2);
-	ft_putstr_fd("|             [5][Number of meals]                   |\n", 2);
-	ft_putstr_fd("|____________________________________________________|\n", 2);
-}
+	t_data	*data;
 
-int main(int argc, char **argv)
-{
-    t_activity *data;
-
-    data = ft_calloc(1, sizeof(activity));
-    
-    if (argc != 5 && argc != 6)
-    {
-        ft_helper_display();
-        return (STDERR_FILENO);
-    }
-    ft_code_core(argc, argv, data);
-    
+	data = ft_calloc(1, sizeof(*data));
+	if (ft_valid_args(argc, argv) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	ft_init_args(argc, argv, data);
+	if (ft_check_pointing_cmd(argc, argv, data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	ft_create_philos(data);
+	return (0);
 }

@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoumad <abderazzakoumad@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 09:50:51 by aoumad            #+#    #+#             */
-/*   Updated: 2022/06/29 13:37:13 by aoumad           ###   ########.fr       */
+/*   Created: 2022/07/04 19:32:09 by aoumad            #+#    #+#             */
+/*   Updated: 2022/07/04 19:32:20 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/philo.h"
 
-int	builtin_pwd(int argc __attribute((unused)),
-	char **argv __attribute((unused)))
+void	*ft_death_checker(void *arg)
 {
-	int	i;
+	t_philo	*philo;
 
-	i = 0;
-	char buf[MAX_BUF];
-	if (getcwd(buf, sizeof(buf)))
+	philo = (t_philo *)arg;
+	while (philo->data->died != DEAD)
 	{
-		ft_putendl_fd(buf, STDOUT_FILENO);
-		return (0);
-	}
-	else if (!getcwd(NULL, 0))
-	{
-		while (g_env[i])
+		if (ft_get_time_of_day() - philo->last_eat >= (long)philo->time_to_die)
 		{
-			if (!ft_strncmp(g_env[i], "PWD", 3))
-			{
-				printf("%s\n", g_env[i] + 4);
-			}
-			i++;
+			pthread_mutex_lock(&philo->lock_dead);
+			philo->data->died = DEAD;
+			philo->dead_time = ft_get_time_of_day() - philo->time_reference;
+			ft_affichage("is died", philo, DEAD);
 		}
 	}
-	return (0);		
+	return (NULL);
 }
